@@ -18,64 +18,32 @@ public class ArvoreInt
 	public void insert(int valor)
 	{
 		if (raiz == null) {
+			// a arvore esta vazia, portanto, o novo nodo sera a raiz da arvore.
 			raiz = new NodoInt(valor);
 		} else {
-			insere(raiz, valor);
+			// a arvore nao esta vazia, entao vamos procurar a posicao correta para o novo nodo.
+			insert(raiz, valor);
 		}
 	}
-	
-	private void insere(NodoInt nodoAtual, int valor)
-	{
-		NodoInt nodo = null;
-		if (valor < nodoAtual.getValor()) {
-			nodo = nodoAtual.getEsquerda();
-			if (nodo == null) {
-				nodoAtual.setEsquerda(new NodoInt(valor));
-			}
-		} else if (valor > nodoAtual.getValor()) {
-			nodo = nodoAtual.getDireita();
-			if (nodo == null) {
-				nodoAtual.setDireita(new NodoInt(valor));
-			}
-		}
-		if (nodo != null) {
-			insere(nodo, valor);
-		}
-	}
-	
-//	private void insere(NodoInt nodoAtual, int valor)
-//	{
-//		NodoInt nodo = null;
-//		if (valor < nodoAtual.getValor()) {
-//			nodo = nodoAtual.getEsquerda();
-//			if (nodo == null) {
-//				nodoAtual.setEsquerda(new NodoInt(valor));
-//			}
-//		} else if (valor > nodoAtual.getValor()) {
-//			nodo = nodoAtual.getDireita();
-//			if (nodo == null) {
-//				nodoAtual.setDireita(new NodoInt(valor));
-//			}
-//		}
-//		if (nodo != null) {
-//			insere(nodo, valor);
-//		}
-//	}
-	
+
 	private void insert(NodoInt nodoAtual, int valor)
 	{
-		// se o valor < valor do nodoAtual, insere na esquerda.
 		if (valor < nodoAtual.getValor()) {
+			// descendo arvore para a esquerda.
 			if (nodoAtual.getEsquerda() == null) {
+				// encontrada a posicao do novo nodo.
 				nodoAtual.setEsquerda(new NodoInt(valor));
 			} else {
+				// segue descendo arvore para a esquerda.
 				insert(nodoAtual.getEsquerda(), valor);
 			}
-		// se o valor for > valor do nodoAtual, insere na direita.
 		} else if (valor > nodoAtual.getValor()) {
+			// descendo arvore para a direita.
 			if (nodoAtual.getDireita() == null) {
+				// encontrada a posicao do novo nodo.
 				nodoAtual.setDireita(new NodoInt(valor));
 			} else {
+				// segue descendo arvore para a direita.
 				insert(nodoAtual.getDireita(), valor);
 			}
 		}
@@ -91,7 +59,7 @@ public class ArvoreInt
 		this.contador = 0;
 		return search(raiz, valor);
 	}
-	
+
 	private NodoInt search(NodoInt nodo, int valor)
 	{
 		if (nodo == null) {
